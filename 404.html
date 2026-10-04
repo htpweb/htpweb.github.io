@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HTPWEB</title>
+</head>
+<body>
+<script>
+(function(){
+  var parts=location.pathname.split("/").filter(Boolean);
+  if(parts.length===1 && /^[A-Za-z0-9]{3,40}$/.test(parts[0])){
+    location.replace("https://htpweb.github.io/htpweb/app/index.html?delivery="+encodeURIComponent(parts[0]));
+    return;
+  }
+  location.replace("https://htpweb.github.io/htpweb/");
+})();
+</script>
+</body>
+</html>
