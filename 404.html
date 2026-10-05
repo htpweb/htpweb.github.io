@@ -10,10 +10,29 @@
 <script>
 (function(){
   var parts=location.pathname.split("/").filter(Boolean);
-  if(parts.length===1 && /^[A-Za-z0-9]{3,40}$/.test(parts[0])){
-    location.replace("https://htpweb.github.io/htpweb/app/index.html?delivery="+encodeURIComponent(parts[0]));
-    return;
+  var sectionMap={
+    "":"home",
+    "quienes-somos":"about",
+    "servicios":"services",
+    "tienda":"shop",
+    "proyectos":"projects",
+    "blog":"blog",
+    "contacto":"contact"
+  };
+
+  if(parts.length>=1 && parts.length<=2){
+    var slug=decodeURIComponent(parts[0]||"");
+    var route=(parts[1]||"").toLowerCase();
+    if(slug && Object.prototype.hasOwnProperty.call(sectionMap,route)){
+      var target=new URL("https://htpweb.github.io/htpweb/app/tienda.html");
+      target.searchParams.set("local",slug);
+      target.searchParams.set("section",sectionMap[route]);
+      target.searchParams.set("__root","1");
+      location.replace(target.toString());
+      return;
+    }
   }
+
   location.replace("https://htpweb.github.io/htpweb/");
 })();
 </script>
